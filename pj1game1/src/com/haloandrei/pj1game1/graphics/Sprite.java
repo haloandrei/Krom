@@ -24,6 +24,7 @@ public class Sprite {
 	public static Sprite spawn_grass2 = new Sprite(16 , 2 ,0 , SpriteSheet.spawn_level);
 	public static Sprite spawn_carpet = new Sprite(16 , 2 ,1 , SpriteSheet.spawn_level);
 	public static Sprite spawn_bush   = new Sprite(16 , 2 ,2 , SpriteSheet.spawn_level);
+	public static Sprite tree = new Sprite(48 , 0 , 0 , SpriteSheet.tree);
 	
 	/// Player Sprites:
 	
@@ -58,6 +59,7 @@ public class Sprite {
 	
 	//Particles
 	public static Sprite particle_normal = new Sprite(2 , 0xAAAAAA);
+	public static Sprite particle_dash = new Sprite(2 , 0x7a29f4);
 	
 	public Sprite(int size, int x,int y, SpriteSheet sheet){
 		SIZE = size;

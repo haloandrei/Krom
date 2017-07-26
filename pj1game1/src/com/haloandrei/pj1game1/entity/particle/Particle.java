@@ -10,7 +10,7 @@ public class Particle extends Entity{
 	private int life;
 	protected double xa,ya,za,xx,yy,zz;
 	
-public Particle (int x,int y,int life) {
+public Particle (int x,int y,int life,int type) {
 		
 		this.x=x;
 		this.y=y;
@@ -18,11 +18,17 @@ public Particle (int x,int y,int life) {
 		this.yy=y;
 		this.life=life +(random.nextInt(20) - 10);
 		
-		sprite = Sprite.particle_normal;
-		
+		if(type == 0) {sprite = Sprite.particle_normal;
 		this.xa= random.nextGaussian();
 		this.ya= random.nextGaussian();
 		this.zz= random.nextFloat() + 2.0;
+		
+		}
+		if(type == 1) {sprite = Sprite.particle_dash;
+		
+		this.xa= random.nextGaussian() /2;
+		this.ya= random.nextGaussian() /2;
+		this.zz= random.nextFloat() + 1.0;}
 	}
 	
 	public void update(){

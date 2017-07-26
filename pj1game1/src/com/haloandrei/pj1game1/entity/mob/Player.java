@@ -4,6 +4,7 @@ import com.haloandrei.pj1game1.MainGame1;
 import com.haloandrei.pj1game1.entity.projectile.GunTier1Projectile;
 import com.haloandrei.pj1game1.entity.projectile.Projectile;
 import com.haloandrei.pj1game1.entity.projectile.SpellTier1Projectile;
+import com.haloandrei.pj1game1.entity.spawner.ParticleSpawner;
 import com.haloandrei.pj1game1.graphics.Screen;
 import com.haloandrei.pj1game1.graphics.Sprite;
 import com.haloandrei.pj1game1.graphics.UI.UIManager;
@@ -15,14 +16,14 @@ import com.haloandrei.pj1game1.util.Vector2i;
 public class Player extends Mob {
 	
 
-	private double resistance = 1, health =100,regeneration= 2.5,nx,ny;
+	private double resistance = 1, health =100,regeneration= 0.05,nx,ny;
 	private Keyboard input;
 	private Sprite sprite;
 	private int anim=0;
 	private boolean walking = false;
 	
 	Projectile p;
-	private int fireRate = 0,DashCooldown =0 ;
+	private int fireRate = 0,DashCooldown = 0 ;
 	
 	private UIManager ui;
 	
@@ -45,7 +46,7 @@ public class Player extends Mob {
 	}
 	
 	public void update() {
-		if(health < 100)health +=0.05;
+		if(health < 100) health += regeneration;
 		if(fireRate > 0) fireRate--;
 		if(DashCooldown > 0) DashCooldown--; 
 		if(health <= 0) MainGame1.menu.Show(true);
@@ -95,7 +96,7 @@ public class Player extends Mob {
 		if (input.space && DashCooldown <=0){
 			double dx = Mouse.getX() - MainGame1.getWindowWidth()  / 2;
 		    double dy = Mouse.getY() - MainGame1.getWindowHeight() / 2;
-		    double dir = Math.atan2(dy, dx);
+		   // double dir = Math.atan2(dy, dx);
 		    
 		     nx=dx/3 -1;
 		     ny=dy/3 - 12;
@@ -108,12 +109,16 @@ public class Player extends Mob {
 		    	else if(ny >48) ny= 48;
 		    	move ((int)nx,(int)ny);
 		     }
-		DashCooldown= 50;
+		     level.add(new ParticleSpawner((int) x - 5,(int) y +12,44,50,level,1));
+		DashCooldown= 100;
 		}
 	} 
 	
     public double getHealth(){
     	return health;
+    }
+    public double getDashCooldown(){
+    	return DashCooldown;
     }
     public void recivedDamage(double dmg){
     	health -= (dmg - dmg*resistance/100) ;

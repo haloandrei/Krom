@@ -1,9 +1,7 @@
 package com.haloandrei.pj1game1.graphics;
 
-import java.awt.Color;
 import java.util.Random;
 
-import com.haloandrei.pj1game1.entity.mob.Player;
 import com.haloandrei.pj1game1.entity.projectile.Projectile;
 import com.haloandrei.pj1game1.level.tile.Tile;
 
@@ -33,6 +31,22 @@ public class Screen {
 				pixels[i]= 0;
 		}
 		
+		public void renderSheet(int xp,int yp, SpriteSheet sheet,boolean fixed){
+			if (fixed) {
+				xp -=xOffset;
+				yp -=yOffset;
+			}
+			for(int y = 0 ; y<sheet.height ; y++){
+				int ya= y + yp ;
+				for(int x = 0 ; x<sheet.width ; x++){
+					int xa=x +xp;
+					int col= sheet.pixels[x+y*sheet.width];
+					if(xa <0 || xa >= width || ya<0 || ya >= height) continue;
+					if(col != 0xffff00ff)
+					 pixels[xa+ya *width]=sheet.pixels[x+y *sheet.width];
+					}
+				}
+		}	
 	public void renderSprite(int xp,int yp, Sprite sprite,boolean fixed){
 		if (fixed) {
 			xp -=xOffset;
@@ -47,7 +61,20 @@ public class Screen {
 				}
 			}
 	}
-
+	public void renderSprite(int xp,int yp,int increment, Sprite sprite,boolean fixed){
+		if (fixed) {
+			xp -=xOffset;
+			yp -=yOffset;
+		}
+		for(int y = 0 ; y<sprite.getHeight() ; y++){
+			int ya= y + yp ;
+			for(int x = 0 ; x<sprite.getWidth() ; x++){
+				int xa=x +xp;
+				if(xa <0 || xa >= width || ya<0 || ya >= height) continue;
+				pixels[xa+ya *width]=sprite.pixels[x+y *sprite.getWidth()] - increment;
+				}
+			}
+	}
 	public void renderTile(int xp,int yp, Tile tile){
 		xp -=xOffset;
 		yp -=yOffset;

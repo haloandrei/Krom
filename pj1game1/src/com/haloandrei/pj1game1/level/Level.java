@@ -8,6 +8,7 @@ import com.haloandrei.pj1game1.entity.spawner.Spawner;
 import com.haloandrei.pj1game1.entity.particle.Particle;
 import com.haloandrei.pj1game1.entity.projectile.Projectile;
 import com.haloandrei.pj1game1.graphics.Screen;
+import com.haloandrei.pj1game1.graphics.SpriteSheet;
 import com.haloandrei.pj1game1.level.tile.Tile;
 
 public class Level {
@@ -99,13 +100,17 @@ public class Level {
 				getTile(x,y).render(x, y, screen);
 				}
 			}
-		
+		screen.renderSheet(12*16, 13*16,SpriteSheet.tree,true);
+		screen.renderSheet(17*16, 18*16,SpriteSheet.tree,true);
+		screen.renderSheet(8*16, 16*16,SpriteSheet.tree,true);
+		screen.renderSheet(25*16, 11*16,SpriteSheet.tree,true);
 		for(int i=0;i<entities.size();i++){
 			entities.get(i).render(screen);}
 		for(int i=0;i<projectiles.size();i++){
 			projectiles.get(i).render(screen);}
 		for(int i=0;i<particles.size();i++){
 			particles.get(i).render(screen);}
+		
 		}
 	
 	public void add (Entity e){

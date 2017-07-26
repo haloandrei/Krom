@@ -21,7 +21,7 @@ public class GunTier1Projectile extends Projectile {
 	}
 	public void update(){
 		if(level.tileCollision((int)(x + nx),(int)(y+ ny), 3,7 ,7 )){
-			level.add(new ParticleSpawner((int) x - 10,(int) y + 9,44,50,level));
+			level.add(new ParticleSpawner((int) x - 10,(int) y + 9,44,50,level,0));
 		}
 		move();
 		despawn();

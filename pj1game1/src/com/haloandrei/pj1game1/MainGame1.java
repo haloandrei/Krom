@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import com.haloandrei.pj1game1.entity.mob.Player;
 import com.haloandrei.pj1game1.graphics.Screen;
 import com.haloandrei.pj1game1.graphics.Sprite;
+import com.haloandrei.pj1game1.graphics.SpriteSheet;
 import com.haloandrei.pj1game1.input.Keyboard;
 import com.haloandrei.pj1game1.input.Mouse;
 import com.haloandrei.pj1game1.level.Level;
@@ -133,8 +134,9 @@ public class MainGame1 extends Canvas implements Runnable{
 	   }
 	   
 	   public void update(){
-		 uiManager.update();
+		// uiManager.update();
 		  if(!menu.isShown()){
+			  
 		  key.update(); 
 		  level.update();
 		  xop++;
@@ -171,7 +173,7 @@ public class MainGame1 extends Canvas implements Runnable{
 		   int yScroll= player.y - screen.height/2;
 	       level.render(xScroll, yScroll, screen);
 		  
-		  /* ///Spawnplace
+		  /* ///Spawnplace idea 
 		   Random random = new Random();
 		   Sprite spawnparticle = new Sprite(1 , 1 ,0xff00ee);
 		   for(int i=1;i<=100; i++)
@@ -179,7 +181,7 @@ public class MainGame1 extends Canvas implements Runnable{
 			   int x = random.nextInt(16);
 			   int y = random.nextInt(16);
 			   screen.renderSprite(20*16 +x,64*16 +y,spawnparticle,true); 
-		   }*/
+		   }*/  	
 			    player.render(screen);
 		   ///UI
 			    int HealthbarDecrement = (100 - (int)player.getHealth())*2;
@@ -194,7 +196,7 @@ public class MainGame1 extends Canvas implements Runnable{
 			  
 			   }
 		   
-		   screen.renderSprite(70, height-18, Sprite.DashIcon, false);
+		   screen.renderSprite(70, height-18,(int) player.getDashCooldown() *3, Sprite.DashIcon, false);
 		   
 		  // System.out.println(player.getHealth());
 		   }
