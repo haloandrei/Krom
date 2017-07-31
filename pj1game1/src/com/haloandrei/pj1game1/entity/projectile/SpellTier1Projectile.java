@@ -1,14 +1,15 @@
 package com.haloandrei.pj1game1.entity.projectile;
+import com.haloandrei.pj1game1.entity.spawner.ParticleSpawner;
 import com.haloandrei.pj1game1.graphics.Screen;
 	import com.haloandrei.pj1game1.graphics.Sprite;
 public class SpellTier1Projectile extends Projectile {
 	   
-		public static final int FireRate = 100;//35;
+		public static final int FireRate = 60;//35;
 		private int xory = 0;
 		public SpellTier1Projectile (int x,int y, double dir)
 		{
 			super(x,y,dir);
-			range=random.nextInt(100)+50;
+			range=random.nextInt(100)+200;
 			speed=2;
 			damage=1;
 			sprite= Sprite.projectile_SpellTier1;
@@ -16,6 +17,9 @@ public class SpellTier1Projectile extends Projectile {
 			ny=speed * Math.sin(angle);
 		}
 		public void update(){
+			if(level.tileCollision((int)(x + nx),(int)(y+ ny), 3,7 ,7 )){
+				level.add(new ParticleSpawner((int) x -10,(int) y + 9,44,50,level,0));
+			}
 			move();
 			despawn();
 		}

@@ -23,7 +23,7 @@ public class Player extends Mob {
 	private boolean walking = false;
 	
 	Projectile p;
-	private int fireRate = 0,DashCooldown = 0 ;
+	private int fireRate = 0,DashCooldown = 0 ,fireRateInit = GunTier1Projectile.FireRate , Weapon = 1;
 	
 	private UIManager ui;
 	
@@ -42,7 +42,7 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite=Sprite.player_forward;
-		fireRate=GunTier1Projectile.FireRate;
+		fireRate=SpellTier1Projectile.FireRate;
 	}
 	
 	public void update() {
@@ -65,6 +65,7 @@ public class Player extends Mob {
 		clear();
 		updateShooting();
 		updateAbility();
+		updateChangeWeapon();
 	}
 	
 	private void clear() {
@@ -86,11 +87,24 @@ public class Player extends Mob {
 			double dx = Mouse.getX() - MainGame1.getWindowWidth()  / 2;
 		    double dy = Mouse.getY() - MainGame1.getWindowHeight() / 2;
 		    double dir = Math.atan2(dy, dx);
-		shoot(x,y-10,dir);
-		fireRate= GunTier1Projectile.FireRate;
+		shoot(x,y-10,dir,Weapon);
+		fireRate= fireRateInit;
 		}
 		
 	}
+	private void updateChangeWeapon() {
+			
+			
+			if (input.no1){
+				Weapon = 1;
+			fireRateInit= GunTier1Projectile.FireRate;
+			}
+			else if (input.no2){
+				Weapon = 2;
+			fireRateInit= SpellTier1Projectile.FireRate;
+			}
+			
+		}
 		private void updateAbility() {
 
 		if (input.space && DashCooldown <=0){

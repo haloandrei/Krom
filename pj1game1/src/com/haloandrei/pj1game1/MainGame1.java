@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 import com.haloandrei.pj1game1.entity.mob.Player;
+import com.haloandrei.pj1game1.entity.spawner.ParticleSpawner;
 import com.haloandrei.pj1game1.graphics.Screen;
 import com.haloandrei.pj1game1.graphics.Sprite;
 import com.haloandrei.pj1game1.graphics.SpriteSheet;
@@ -92,7 +93,7 @@ public class MainGame1 extends Canvas implements Runnable{
 	   
 	   public synchronized void stop() {
 		   running = false ;
-		   //write.main(player.x, player.y);
+		   //write.main(player.x, player.y); ~~~~~~Idee de salvat pozitia playerului dupa inchiderea aplicatiei imprementata jumatate~~~~~~~
 		   try {
 		   thread.join();
 		   } catch (InterruptedException e) {
@@ -147,7 +148,12 @@ public class MainGame1 extends Canvas implements Runnable{
 	    				//System.out.println("daaaaa"+ x+ " " + y + " "+ player.x/16);
 	    				if(xop > 300) {level.getTile(x,y).open(true);
 	    				for(int c=0;c<4;c++)
-	    				if((player.x + c % 2 * 7 - 4)/16 == x && (player.y+ c / 2 * 2 +13)/16 == y) player.recivedDamage(0.5);
+	    				if((player.x + c % 2 * 7 - 4)/16 == x && (player.y+ c / 2 * 2 +13)/16 == y) 
+	    				{
+	    					player.recivedDamage(0.5);
+	    						level.add(new ParticleSpawner(player.x,player.y+13,84 ,5 ,level,2));
+	    					
+	    				}
 	    				}
 	    				else level.getTile(x,y).open(false);
 	    		}

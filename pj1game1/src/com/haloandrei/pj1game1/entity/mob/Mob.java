@@ -8,11 +8,13 @@ import com.haloandrei.pj1game1.entity.particle.Particle;
 import com.haloandrei.pj1game1.entity.projectile.GunTier1Projectile;
 import com.haloandrei.pj1game1.entity.projectile.Projectile;
 import com.haloandrei.pj1game1.entity.projectile.SpellTier1Projectile;
+import com.haloandrei.pj1game1.entity.spawner.ParticleSpawner;
 import com.haloandrei.pj1game1.graphics.Sprite;
 import com.haloandrei.pj1game1.level.tile.Tile;
 import com.haloandrei.pj1game1.level.tile.Tile;
 public abstract class Mob extends Entity {
 
+	
 	protected Sprite spirte;
 	protected int dir = 0;
 	protected boolean moving = false;
@@ -32,13 +34,21 @@ public abstract class Mob extends Entity {
 		if (!collision(xa,ya)){
 		x += xa;
 		y += ya;}
-	}
+		}
+	
 	
 	public void update() {
 	}
-	protected void shoot(int x,int y,double dir){
+	protected void shoot(int x,int y,double dir,int weapon){
+		if(weapon == 1)
+		{
 		Projectile p = new GunTier1Projectile(x,y,dir);
 		level.add(p);
+		}
+		else if (weapon == 2)
+		{
+		Projectile p = new SpellTier1Projectile(x,y,dir);
+		level.add(p);}
 		
 		//dir *= (180/ Math.PI);
 		///System.out.println("Angle : "+dir);

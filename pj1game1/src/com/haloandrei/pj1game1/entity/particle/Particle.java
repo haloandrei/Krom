@@ -29,7 +29,13 @@ public Particle (int x,int y,int life,int type) {
 		this.xa= random.nextGaussian() /2;
 		this.ya= random.nextGaussian() /2;
 		this.zz= random.nextFloat() + 1.0;}
+	if(type == 2) {sprite = Sprite.particle_blood;
+		
+		this.xa= random.nextGaussian() /2;
+		this.ya= random.nextGaussian() /2;
+		this.zz= random.nextFloat() + 3.0;}
 	}
+
 	
 	public void update(){
 		time++;

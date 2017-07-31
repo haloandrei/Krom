@@ -60,6 +60,7 @@ public class Sprite {
 	//Particles
 	public static Sprite particle_normal = new Sprite(2 , 0xAAAAAA);
 	public static Sprite particle_dash = new Sprite(2 , 0x7a29f4);
+	public static Sprite particle_blood = new Sprite(2 , 0xFF0000);
 	
 	public Sprite(int size, int x,int y, SpriteSheet sheet){
 		SIZE = size;
